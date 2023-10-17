@@ -1,17 +1,28 @@
 import React, { useState } from "react";
 import Button from "./Button";
 import DemoProfile from "./DemoProfile";
+import RenderList from "./RenderList";
 
 const App = () => {
   // variable used
   const name = "Himanshu";
+  const products = [
+    { title: "Cabbage", isFruit: false, id: 1 },
+    { title: "Garlic", isFruit: false, id: 2 },
+    { title: "Apple", isFruit: true, id: 3 },
+  ];
 
   //   state
   const [display, setDisplay] = useState(false);
+  const [count, setCount] = useState(0);
 
   //   functions
   const handleShow = () => {
     setDisplay((prev) => !prev);
+  };
+
+  const handleClick = () => {
+    setCount(count + 1);
   };
 
   return (
@@ -42,6 +53,19 @@ const App = () => {
       <h2>Conditional Rendering</h2>
       <Button text={"Show/Hide"} click={handleShow} />
       {display && <p>I will hide</p>}
+
+      <h2>Rendering Lists</h2>
+      <ul>
+        {products.map((item) => {
+          return <RenderList item={item} />;
+        })}
+      </ul>
+
+      <h2>Responding to Events</h2>
+      <Button text={"Click me"} click={() => alert("You clicked me")} />
+
+      <h2>Updating the screen, Using Hooks, Sharing Data</h2>
+      <Button text={`Clicked ${count} times`} click={handleClick} />
     </>
   );
 };
